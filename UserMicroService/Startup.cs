@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Application.Repositories;
 using AutoMapper;
+using Infrastructure;
+using Infrastructure.EFDataAcess.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace UserMicroService
 {
@@ -32,6 +30,9 @@ namespace UserMicroService
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddDbContext<UserContext>(options =>
       options.UseSqlServer(Configuration.GetConnectionString("UserDb")));
+            services.AddTransient<IUserReadOnlyRepository, UserRepository>();
+            services.AddOptions();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

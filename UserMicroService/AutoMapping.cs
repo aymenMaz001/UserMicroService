@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Infrastructure.EFDataAcess.Entities;
 
 namespace UserMicroService
 {
@@ -6,7 +7,8 @@ namespace UserMicroService
     {
         public AutoMapping()
         {
-            //CreateMap<Product, Domain.Product>();
+            CreateMap<User, Domain.User>();
+            CreateMap<Information, Domain.Information>();
         }
     }
 }

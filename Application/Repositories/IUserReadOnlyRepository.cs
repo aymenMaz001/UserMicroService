@@ -8,5 +8,6 @@ namespace Application.Repositories
     {
         Task<User> Get(int id);
         Task<List<User>> GetAll();
+        Task<User> Authentification(string user, string password);
     }
 }

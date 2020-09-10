@@ -18,6 +18,17 @@ namespace Infrastructure.EFDataAcess.Repositories
             _mapper = mapper;
         }
 
+        public async Task<User> Authentification(string userName, string password)
+        {
+            var user = await _context.users
+                .Include(t => t.Information)
+                ?.FirstOrDefaultAsync(u => u.UserName.Equals(userName) && u.Password.Equals(password));
+            if (user == null)
+                return null;
+            User UserDTO = _mapper.Map<User>(user);
+            return UserDTO;
+        }
+
         public async Task<User> Get(int id)
         {
             var user = await _context.users

@@ -9,5 +9,15 @@ namespace UserMicroService.UseCases.Authentification
     {
         public string UserName { get; set; }
         public string Password { get; set; }
+
+        public AuthParameters()
+        {
+                
+        }
+        public AuthParameters(string userName, string password)
+        {
+            UserName = userName;
+            Password = password;
+        }
     }
 }

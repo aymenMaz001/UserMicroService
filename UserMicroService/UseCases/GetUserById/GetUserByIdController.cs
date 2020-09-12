@@ -21,7 +21,7 @@ namespace UserMicroService.UseCases.GetUserById
 
         // GET api/GetUserByIdController/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetFeeById(int id)
+        public async Task<IActionResult> GetUserId(int id)
         {
             return Ok(_userReadOnlyRepository.Get(id).Result);
         }

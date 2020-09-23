@@ -8,7 +8,9 @@ namespace UserMicroService
         public AutoMapping()
         {
             CreateMap<User, Domain.User>();
+            CreateMap<Domain.User, User>();
             CreateMap<Information, Domain.Information>();
+            CreateMap<Domain.Information, Information>();
         }
     }
 }

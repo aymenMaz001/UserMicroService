@@ -11,6 +11,8 @@ namespace UserMicroService
             CreateMap<Domain.User, User>();
             CreateMap<Information, Domain.Information>();
             CreateMap<Domain.Information, Information>();
+            CreateMap<Domain.Simulation, Simulation>();
+            CreateMap<Simulation, Domain.Simulation>();
         }
     }
 }

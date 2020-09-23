@@ -8,6 +8,7 @@ namespace Infrastructure
     {
         public DbSet<User> users { get; set; }
         public DbSet<Information> information { get; set; }
+        public DbSet<Simulation> simulations{ get; set; }
         public UserContext(DbContextOptions<UserContext> options) : base(options)
         {
 
@@ -17,6 +18,7 @@ namespace Infrastructure
     {
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new InformationConfiguration());
-    }
+        modelBuilder.ApplyConfiguration(new SimulationConfiguration());
+        }
     }
 }

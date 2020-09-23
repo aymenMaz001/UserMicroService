@@ -15,10 +15,8 @@ namespace Infrastructure.EFDataAcess.Entities
         public string UserName { get; set; }
         [Column("password")]
         public string Password { get; set; }
-        [Column("first_name")]
-        public string FirstName { get; set; }
-        [Column("last_name")]
-        public string LastName { get; set; }
+        [Column("c_user")]
+        public DateTime c_user { get; set; }
         [Column("role")]
         public Role Role { get; set; }
         public virtual Information Information { get; set; }

@@ -1,4 +1,5 @@
 using Application.Repositories;
+using Autofac;
 using AutoMapper;
 using Infrastructure;
 using Infrastructure.EFDataAcess.Repositories;
@@ -14,13 +15,20 @@ namespace UserMicroService
 {
     public class Startup
     {
+        public ILifetimeScope AutofacContainer { get; private set; }
         private ConfigurationSetting _configurationSetting;
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfiguration Configuration { get; }
+
+        public Startup(IWebHostEnvironment env)
+        {
+            // In ASP.NET Core 3.0 `env` will be an IWebHostEnvironment, not IHostingEnvironment.
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            this.Configuration = builder.Build();
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)

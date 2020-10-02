@@ -15,6 +15,7 @@ namespace Infrastructure.EFDataAcess.Entities.Seeds
                 UserId = 1,
                 UserName = "agent",
                 Password = "agent",
+                c_user = new DateTime(2020, 02, 01),
                 Role = Role.AGENT,
                 
             },

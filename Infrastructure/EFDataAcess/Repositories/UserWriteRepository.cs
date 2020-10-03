@@ -24,20 +24,9 @@ namespace Infrastructure.EFDataAcess.Repositories
             {
                 Entities.User userDTO = _mapper.Map<Entities.User>(user);
                 _context.users.Add(userDTO);
+                _context.information.Add(userDTO.Information);
                 _context.SaveChanges();
                 return user;
-            }
-            return null;
-        }
-
-        public async Task<Information> AddInformation(Information information)
-        {
-            if (information != null)
-            {
-                Entities.Information informationDTO = _mapper.Map<Entities.Information>(information);
-                _context.information.Add(informationDTO);
-                _context.SaveChanges();
-                return information;
             }
             return null;
         }
@@ -45,29 +34,17 @@ namespace Infrastructure.EFDataAcess.Repositories
         public async Task<User> Delete(int id)
         {
             var u = await _context.users.FindAsync(id);
+            var i = await _context.information.FindAsync(id);
             if (u == null)
             {
                 return null;
             }
 
             _context.users.Remove(u);
+            _context.information.Remove(i);
             await _context.SaveChangesAsync();
             User userDTO = _mapper.Map<User>(u);
             return userDTO;
-        }
-
-        public async Task<Information> DeleteInformation(int id)
-        {
-            var u = await _context.information.FindAsync(id);
-            if (u == null)
-            {
-                return null;
-            }
-
-            _context.information.Remove(u);
-            await _context.SaveChangesAsync();
-            Information informationDTO = _mapper.Map<Information>(u);
-            return informationDTO;
         }
 
         public async Task<User> Update(int id, User user)
@@ -77,7 +54,9 @@ namespace Infrastructure.EFDataAcess.Repositories
                 return null;
             }
             Entities.User userDTO = _mapper.Map<Entities.User>(user);
-            _context.Entry(userDTO).State = EntityState.Modified;
+            Entities.Information informationDTO = _mapper.Map<Entities.Information>(user.Information);
+            
+            _context.users.Update(userDTO);
 
             try
             {
@@ -96,33 +75,6 @@ namespace Infrastructure.EFDataAcess.Repositories
             }
 
             return user;
-        }
-
-        public async Task<Information> UpdateInformation(int id, Information information)
-        {
-            if (id != information.InformationId)
-            {
-                return null;
-            }
-            Entities.Information informationDTO = _mapper.Map<Entities.Information>(information);
-            _context.Entry(informationDTO).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (await _context.information.FindAsync(id) == null)
-                {
-                    return null;
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return information;
         }
     }
 }

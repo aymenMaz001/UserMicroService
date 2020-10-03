@@ -1,4 +1,5 @@
 ﻿using Domain.Enum;
+using System;
 
 namespace Domain
 {
@@ -7,23 +8,21 @@ namespace Domain
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public Role Role { get; set; }
+        public DateTime c_user { get; set; }
         public Information Information { get; set; }
         public User()
         {
                 
         }
 
-        public User(int userId, string userName, string password, string firstName, string lastName, Role role, Information information)
+        public User(int userId, string userName, string password, Role role, DateTime c_user, Information information)
         {
             UserId = userId;
             UserName = userName;
             Password = password;
-            FirstName = firstName;
-            LastName = lastName;
             Role = role;
+            this.c_user = c_user;
             Information = information;
         }
     }

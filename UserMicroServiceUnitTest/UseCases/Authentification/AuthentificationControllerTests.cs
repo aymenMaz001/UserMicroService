@@ -3,6 +3,7 @@ using Application.Repositories;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
 using Domain;
+using System;
 
 namespace UserMicroService.UseCases.Authentification.Tests
 {
@@ -23,7 +24,7 @@ namespace UserMicroService.UseCases.Authentification.Tests
         [TestMethod()]
         public async System.Threading.Tasks.Task PostTestAsync_ValidUser_ReturnOK()
         {
-            var user = new User(1, "agent", "agent", "agent", "agent", Domain.Enum.Role.AGENT, null);
+            var user = new User(1, "agent", "agent", Domain.Enum.Role.AGENT,new DateTime(2020,01,01), null);
             authParameters = new AuthParameters("agent", "agent");
             // Act
             userRepository.Setup(u => u.Authentification("agent", "agent")).ReturnsAsync(user);
